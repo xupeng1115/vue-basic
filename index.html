@@ -1,12 +1,143 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>VueJS Tutorials</title>
-        <link href="styles.css" rel="stylesheet" />
-        <script src="https://unpkg.com/vue"></script>
-    </head>
-    <body>
 
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>VueJS Tutorials</title>
+    <link href="styles.css" rel="stylesheet" />
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="vue-app">
+        <h2>Data-binding</h2>
+        <div>{{name}}</div>
+        <div v-text="name"></div>
+        <div v-html="name"></div>
+        <div>{{job}}</div>
+        <div>{{greet('afternoon')}}</div>
+        <a v-bind:href="website">{{website}}}</a>
+        <input type="text" v-bind:value="name">
+        <div v-html="websiteTag"></div>
+        <h2>Events</h2>
+        <div>My age is {{age}}</div>
+        <div>
+            <button v-on:click.once="age++">涨一岁</button>
+            <button v-on:click="age--">减一岁</button>
+        </div>
+        <div>
+            <button @click="add()">涨一岁</button>
+            <button @click="subtract()">减一岁</button>
+        </div>
+        <div>
+            <button @dblclick="add(10)">双击加十岁</button>
+            <button @dblclick="subtract(10)">双击减十岁</button>
+        </div>
+        <div id="canvas" @mousemove="updateXY">
+            <span class="stop" @mousemove="stopMoving">stopMoving</span>{{X}},{{Y}}
+            <span class="stop" @mousemove.stop="">stopMoving</span>
+        </div>
+        <div>
+            <a @click.prevent="Alert" href="http://www.thenewstep.com">The new step</a>
+        </div>
+        <h2>键盘 Events</h2>
+        <div>
+            <label for="">姓名：</label>
+            <input type="text" v-on:keyup="logName">
+            <input type="text" @keyup.enter="logName">
+        </div>
+        <div>
+            <label for="">年龄：</label>
+            <input type="text" v-on:keyup="logAge">
+            <input type="text" v-on:keyup.alt.enter="logAge">
+        </div>
+        <h2>双向数据绑定 input / select / textarea </h2>
+        <div>
+            <label for="">姓名</label>
+            <input type="text" v-model="name">
+            <p>{{name}}</p>
+        </div>
+        <div>
+            <label for="">年龄</label>
+            <input type="text" v-model="age">
+            <p>{{age}}</p>
+        </div>
+        <div>
+            <label for="">姓名</label>
+            <input type="text" ref="name" v-on:keyup="getName" v-bind:value="name">
+            <p>{{name}}</p>
+        </div>
+        <div>
+            <label for="">年龄</label>
+            <input type="text" ref="age" v-on:keyup="getAge" v-bind:value="age">
+            <p>{{age}}</p>
+        </div>
+        <h2>Computed 计算属性</h2>
+        <div>
+            <button @click="a++">Add to A</button>
+            <button @click="b++">Add to B</button>
+            <div>A-{{a}}</div>
+            <div>b-{{b}}</div>
+            <p>Age+A={{addToA()}}</p>
+            <p>Age+B={{addToB()}}</p>
+            <!-- <p v-text="'Age+A='+addToA()"></p>
+            <p v-text="'Age+B='+addToB()"></p> -->
+            <div>
+                <p>Age+A={{addToA1}}</p>
+                <p>Age+B={{addToB1}}</p>
+            </div>
+        </div>
+        <h2>绑定CSS和style</h2>
+        <div>
+            <div v-bind:class="{red:true}">实例一</div>
+            <div v-bind:class="{red:false,blue:true}">实例二</div>
+            <div v-bind:class="{red:changeColor,blue:!changeColor}">动态绑定</div>
+            <button @click="changeStyle">改变</button>
+            <div v-bind:class="compClasses">也是动态绑定</div>
+        </div>
+        <h2>if使用</h2>
+        <div>
+            <button @click="error=!error">Toggle Error</button>
+            <button @click="success=!success">Toggle Success</button>
+            <div>
+                <p v-if="error">网络连接错误:404</p>
+                <p v-if="success">网络连接成功:200</p>
+            </div>
+            <div>
+                <p v-if="error">网络连接错误:404</p>
+                <p v-else-if="success">网络连接成功:200</p>
+            </div>
+            <div>
+                <p v-show="error">网络连接错误:404</p>
+                <p v-show="success">网络连接成功:200</p>
+            </div>
+        </div>
+        <h2>v-for使用</h2>
+        <div>
+            <ul>
+                <li v-for="(item,index) in characters" v-bind:key="index" v-text="item"></li>
+            </ul>
+            <ul>
+                <li v-for="(item,index) in users" v-bind:key="index" v-text="index+1+'--'+item.name+'--'+item.age"></li>
+            </ul>
+            <div v-for="(user,index) in users" v-bind:key="index">
+                <h3>{{index}} . {{user.name}}</h3>
+                <p>Age - {{user.age}}</p>
+            </div>
+            <template v-for="(user,index) in users">
+                <h3>{{index}} . {{user.name}}</h3>
+                <p>Age - {{user.age}}</p>
+            </template>
+            <template v-for="(user,index) in users">
+                <div v-for="(val,key) in user">
+                    <p>{{key}}--{{val}}</p>
+                </div>
+            </template>
+
+        </div>
+        
+    </div>
+    <script src="app.js"></script>
+</body>
+
 </html>

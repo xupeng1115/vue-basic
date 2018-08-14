@@ -1,0 +1,22 @@
+#canvas{
+    width:300px;
+    padding:150px 10px;
+    text-align:center;
+    border:1px solid #333;
+}
+
+.stop{
+    display:inline-block;
+    height:50px;
+    width:100px;
+    background:#ff6060;
+}
+.red{
+    color:#ff6060;
+}
+.blue{
+    color:#00eeff;
+}
+.back{
+    background:#ffbf00;
+}
